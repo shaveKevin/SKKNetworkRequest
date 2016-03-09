@@ -26,6 +26,7 @@ static CGFloat const timeOutInterval = 60.0f;
         _requestSerializerType = SKNetworkRequestSerializerTypeHttp;
         _useCDN = NO;
         _dataArray =[NSMutableArray array];
+        _dataDict = [NSMutableDictionary dictionary];
     }
     return self;
 }

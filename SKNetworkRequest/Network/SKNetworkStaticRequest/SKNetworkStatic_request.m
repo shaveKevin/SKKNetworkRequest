@@ -47,11 +47,10 @@ static NSString *const staticAPI = @"http://m.aipai.com/mobile/xifen/collect_men
  */
 - (void)dealWithData {
     
-    NSString *responseString = [self responseString];
-    NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    if (result!= nil) {
-        NSArray *contentArray = (NSArray *)result[@"data"];
+    [super dealWithData];
+    
+    if (self.dataDict!= nil) {
+        NSArray *contentArray = (NSArray *)self.dataDict[@"data"];
         [self.dataArray addObjectsFromArray:contentArray];
     }
     

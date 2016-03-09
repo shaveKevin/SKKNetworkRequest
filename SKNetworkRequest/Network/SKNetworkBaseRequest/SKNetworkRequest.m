@@ -30,9 +30,14 @@
     return _dicParame;
 }
 
-// 重载
+// 重载 数据序列化
 
 - (void)dealWithData {
+    
+    NSString *responseString = [self responseString];
+    NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    self.dataDict = [NSMutableDictionary dictionaryWithDictionary:result];
     
 }
 @end

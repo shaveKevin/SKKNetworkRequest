@@ -17,7 +17,7 @@
 + (SKNetworkConfig *)shareInstance {
     
     static SKNetworkConfig *shareManager = nil;
-    static   dispatch_once_t  onceToken;
+    static dispatch_once_t  onceToken;
     dispatch_once(&onceToken, ^{
         
         shareManager = [[SKNetworkConfig alloc]init];

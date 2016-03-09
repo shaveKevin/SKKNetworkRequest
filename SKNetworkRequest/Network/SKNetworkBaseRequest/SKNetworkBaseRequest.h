@@ -88,6 +88,7 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 @property (nonatomic, strong) NSArray *requestAuthorizationHeaderFieldArray;
 @property (nonatomic, strong) NSDictionary *requestHeaderFieldValueDictionary;
 @property (nonatomic, assign) BOOL useCDN;
+@property (nonatomic, strong) NSMutableDictionary *dataDict;
 /**
  *  userinfo
  */
