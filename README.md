@@ -1,2 +1,2 @@
 # SKNetworkRequest
-# 基于AFNetworking封装的网络请求
+# 基于猿题库的网络请求
