@@ -1,0 +1,6 @@
+framework module Pods_SKNetworkRequest {
+  umbrella header "Pods-SKNetworkRequest-umbrella.h"
+
+  export *
+  module * { export * }
+}
