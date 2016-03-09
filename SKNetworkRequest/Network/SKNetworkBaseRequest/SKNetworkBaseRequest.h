@@ -11,7 +11,6 @@
 /**
  *  MethodNetworkRequest
  */
-
 typedef NS_ENUM(NSInteger, SKNetworkRequestMethod) {
     /**
      *  Description
@@ -75,35 +74,97 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 
 
 @interface SKNetworkBaseRequest : NSObject
-
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong) NSMutableArray *dataArray;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy) NSString *requestUrl;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy) NSString *cdnUrl;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy) NSString *baseUrl;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, assign) NSTimeInterval requestTimeoutInterval;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong) id requestArgument;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, assign) SKNetworkRequestMethod requestMethod;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, assign) NSInteger tag;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, assign) SKNetworkRequestSerializerType  requestSerializerType;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong) NSArray *requestAuthorizationHeaderFieldArray;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong) NSDictionary *requestHeaderFieldValueDictionary;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, assign) BOOL useCDN;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong) NSMutableDictionary *dataDict;
 /**
  *  userinfo
  */
 @property (nonatomic, strong) NSDictionary *userInfo;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong) AFHTTPRequestOperation *requestOperation;
 /**
  *   request  delegate
  */
 @property (nonatomic, weak) id<SKNetworkBaseRequestDelegate> delegate;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong ,readonly) NSDictionary *responseHeaders;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy, readonly) NSString *responseString;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, strong, readonly) id responseJSONObject;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, assign) NSInteger responseStatusCode;
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy) void (^successComplitionBlock)(SKNetworkBaseRequest *);
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy) void (^failureComplitionBlock)(SKNetworkBaseRequest *);
+/**
+ *  <#Description#>
+ */
 @property (nonatomic, copy) void (^cacheComplitionBlock)(SKNetworkBaseRequest *);
 /**
  *  Description

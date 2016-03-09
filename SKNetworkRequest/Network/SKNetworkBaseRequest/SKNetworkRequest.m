@@ -10,27 +10,32 @@
 
 @implementation SKNetworkRequest
 
-//请求成功
+//请求成功 处理数据
 -(void)requestSuccessCompleteFilter {
     
     [self dealWithData];
 }
-
+/**
+ *  请求响应超时时间
+ *
+ *  @return request  called TimeoutInterval
+ */
 
 - (NSTimeInterval)requestTimeoutInterval{
+    
     return 6.0f;
 }
 /**
  * 参数字典
  *
- *  @return 返回参数字典
+ *  @return parameDict
  */
 - (id)requestArgument {
     
     return _dicParame;
 }
 
-// 重载 数据序列化
+// 重载 数据序列化  子类使用的话需要去重载 super
 
 - (void)dealWithData {
     

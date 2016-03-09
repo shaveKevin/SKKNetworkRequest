@@ -1,6 +1,6 @@
 //
 //  SKNetworkStatic_request.m
-//  Masonry111
+//  shavekevinRequest
 //
 //  Created by shavekevin on 16/3/8.
 //  Copyright © 2016年 shavekevin. All rights reserved.
@@ -43,12 +43,14 @@ static NSString *const staticAPI = @"http://m.aipai.com/mobile/xifen/collect_men
  }
  */
 /**
- *  需要重载这里对model赋值。可以使用模型化  yymodel  jsonmodel   mantle   等等
+ *  需要重载这里对model赋值。可以使用模型化  yymodel  jsonmodel   mantle   等等。使用的时候需要super
  */
 - (void)dealWithData {
     
     [super dealWithData];
-    
+    /**
+     *  这里根据接口的实际情况来处理
+     */
     if (self.dataDict!= nil) {
         NSArray *contentArray = (NSArray *)self.dataDict[@"data"];
         [self.dataArray addObjectsFromArray:contentArray];

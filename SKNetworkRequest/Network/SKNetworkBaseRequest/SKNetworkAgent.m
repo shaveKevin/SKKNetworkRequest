@@ -118,6 +118,7 @@
         
     }
 }
+
 - (void)asyncRequest:(SKNetworkBaseRequest *)request url:(NSString *)url  parame:(NSDictionary *)parame{
     
     SKNetworkRequestMethod method = [request requestMethod];
@@ -185,11 +186,13 @@
         }];
         
     } else {
+        
         return;
     }
     [self addOperation:request];
     
 }
+
 - (void)syncRequest:(SKNetworkBaseRequest *)request url:(NSString *)url  parame:(NSDictionary *)parame{
     SKNetworkRequestMethod method = [request requestMethod];
     AFHTTPRequestSerializer *requestSerializer;
@@ -222,6 +225,7 @@
     [self handleRequestResult:request.requestOperation];
    
 }
+
 - (void)cancleRequest:(SKNetworkBaseRequest *)request {
     
     [request.requestOperation cancel];
@@ -229,6 +233,7 @@
     [self removeOperation:request.requestOperation];
     
 }
+
 - (void)cancleAllRequest {
     
     NSDictionary *copyRecord = [_requestRecord copy];
@@ -237,6 +242,7 @@
         [request stop];
     }
 }
+
 - (void)addOperation:(SKNetworkBaseRequest*)request {
     
     if (request.requestOperation != nil) {
@@ -246,7 +252,6 @@
         }
     }
 }
-
 
 - (void)handleRequestResult:(AFHTTPRequestOperation*)operation {
     
@@ -279,17 +284,17 @@
     
 }
 
-- (void)removeOperation:(AFHTTPRequestOperation*)operation
-{
+- (void)removeOperation:(AFHTTPRequestOperation*)operation {
+    
     NSString* key = [self requestHashKey:operation];
-    @synchronized(self)
-    {
+    @synchronized(self) {
+        
         [_requestRecord removeObjectForKey:key];
     }
 }
 
-- (NSString*)requestHashKey:(AFHTTPRequestOperation*)operation
-{
+- (NSString*)requestHashKey:(AFHTTPRequestOperation*)operation {
+    
     NSString* key = [NSString stringWithFormat:@"%lu", (unsigned long)[operation hash]];
     return key;
 }

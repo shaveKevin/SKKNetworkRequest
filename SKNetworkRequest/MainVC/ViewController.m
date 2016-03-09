@@ -27,17 +27,15 @@
 - (void)getData{
     
     if (_request) {
-        
         [_request stop];
         _request  = nil;
-        
     }
     _request = [[SKNetworkStatic_request alloc]init];
     _request.dicParame = @{@"123":@"version"};
     [_request asyncStartWithCompletionBlockWithSuccess:^(SKNetworkBaseRequest *request) {
         
         SKNetworkStatic_request *requsetStatic = (SKNetworkStatic_request *)request;
-        NSLog(@"%lu",(unsigned long)requsetStatic.dataArray.count);
+        NSLog(@"%@",requsetStatic.dataDict);
         
     } failure:^(SKNetworkBaseRequest *request) {
         //
