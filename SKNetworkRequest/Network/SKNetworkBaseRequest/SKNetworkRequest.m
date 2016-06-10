@@ -7,13 +7,33 @@
 //
 
 #import "SKNetworkRequest.h"
-
+#import "SKResult.h"
 @implementation SKNetworkRequest
+/**
+ *  @brief <#Description#>
+ */
+- (void)syncStart {
+    [super syncStart];
+}
+/**
+ *  @brief <#Description#>
+ */
+- (void)asyncStart {
+    [super asyncStart];
+}
 
-//请求成功 处理数据
+/// 请求失败
+- (void)requestFailedFilter {
+}
+
+/// 请求成功 处理数据 .
 -(void)requestSuccessCompleteFilter {
     
-    [self dealWithData];
+    [self convertJson];
+
+    // 老的 新的。
+    //[self dealWithData];
+    
 }
 /**
  *  请求响应超时时间
@@ -38,11 +58,23 @@
 // 重载 数据序列化  子类使用的话需要去重载 super
 
 - (void)dealWithData {
-    
-    NSString *responseString = [self responseString];
-    NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    self.dataDict = [NSMutableDictionary dictionaryWithDictionary:result];
+    self.dataDict = [NSMutableDictionary dictionaryWithDictionary:[self responseJSONObject]];
     
 }
+
+- (void)convertJson{
+       NSDictionary * result = [self responseJSONObject];
+    if([self jsonModelClass:result] &&
+       [[self jsonModelClass:result] isSubclassOfClass:[SKResult class]]) {
+        id obj = [[self jsonModelClass:result] parseTotalJson:result];
+        self.result = obj;
+    }
+}
+- (Class)jsonModelClass:(NSDictionary *)dictResult {
+    return [SKResult class];
+}
+
+- (void)cacheResult{
+}
+
 @end

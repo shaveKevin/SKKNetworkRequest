@@ -85,7 +85,17 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SKNetworkRequest/AFNetworking.framework"
+  install_framework "Pods-SKNetworkRequest/FMDB.framework"
+  install_framework "Pods-SKNetworkRequest/MJRefresh.framework"
+  install_framework "Pods-SKNetworkRequest/Masonry.framework"
+  install_framework "Pods-SKNetworkRequest/SDWebImage.framework"
+  install_framework "Pods-SKNetworkRequest/YYModel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SKNetworkRequest/AFNetworking.framework"
+  install_framework "Pods-SKNetworkRequest/FMDB.framework"
+  install_framework "Pods-SKNetworkRequest/MJRefresh.framework"
+  install_framework "Pods-SKNetworkRequest/Masonry.framework"
+  install_framework "Pods-SKNetworkRequest/SDWebImage.framework"
+  install_framework "Pods-SKNetworkRequest/YYModel.framework"
 fi

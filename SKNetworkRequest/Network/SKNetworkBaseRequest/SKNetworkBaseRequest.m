@@ -222,18 +222,18 @@ static CGFloat const timeOutInterval = 60.0f;
  */
 - (void)setCompletionBlockWithSuccess:(void (^)(SKNetworkBaseRequest *))success failure:(void (^)(SKNetworkBaseRequest *))failure cache:(void (^)(SKNetworkBaseRequest *))cache {
     
-    self.successComplitionBlock = success;
-    self.failureComplitionBlock = failure;
-    self.cacheComplitionBlock = cache;
+    self.successCompletionBlock = success;
+    self.failureCompletionBlock = failure;
+    self.cacheCompletionBlock = cache;
 }
 /**
  *  <#Description#>
  */
 - (void)clearCompletionBlock {
     
-    self.successComplitionBlock = nil;
-    self.failureComplitionBlock = nil;
-    self.cacheComplitionBlock = nil;
+    self.successCompletionBlock = nil;
+    self.failureCompletionBlock = nil;
+    self.cacheCompletionBlock = nil;
     
 }
 /**
@@ -243,8 +243,8 @@ static CGFloat const timeOutInterval = 60.0f;
  */
 - (NSString *)responseString {
     
-    NSString *responseStr = self.requestOperation.responseString;
-    return responseStr;
+    NSString *responseString = self.requestOperation.responseString;
+    return responseString;
 }
 /**
  *  <#Description#>
@@ -253,8 +253,10 @@ static CGFloat const timeOutInterval = 60.0f;
  */
 - (id)responseJSONObject {
     
-    NSString *responseJSONObject = self.requestOperation.responseObject;
-    return responseJSONObject;
+     NSString *responseString = self.responseString;
+     NSData *data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+     return  result;
     
 }
 /**
@@ -264,8 +266,7 @@ static CGFloat const timeOutInterval = 60.0f;
  */
 - (NSInteger)responseStatusCode {
     
-    NSInteger responeStatusCode = self.requestOperation.response.statusCode;
-    return responeStatusCode;
+    return self.requestOperation.response.statusCode;
 }
 /**
  *  <#Description#>
@@ -274,8 +275,8 @@ static CGFloat const timeOutInterval = 60.0f;
  */
 - (NSDictionary *)responseHeaders {
     
-    NSDictionary *responseHeadersDict = self.requestOperation.response.allHeaderFields;
-    return responseHeadersDict;
+    return self.requestOperation.response.allHeaderFields;
+
 }
 
 

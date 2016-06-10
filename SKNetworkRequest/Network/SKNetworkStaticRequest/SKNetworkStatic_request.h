@@ -13,5 +13,5 @@
 #import "SKNetworkRequest.h"
 
 @interface SKNetworkStatic_request : SKNetworkRequest
-
+- (void)dealWithData;
 @end

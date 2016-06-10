@@ -20,11 +20,30 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - Masonry (1.0.1)
+  - MJRefresh (3.1.0)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
+  - YYModel (1.0.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.3)
+  - FMDB (~> 2.5)
+  - Masonry (~> 1.0.1)
+  - MJRefresh (~> 3.1.0)
+  - SDWebImage (~> 3.7.6)
+  - YYModel (~> 1.0.3)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  YYModel: 63142c2f07c5c8c9d1c261689cf3827ea6ab2886
 
 COCOAPODS: 0.39.0

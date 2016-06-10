@@ -263,8 +263,8 @@
             if (request.delegate != nil) {
                 [request.delegate requestFinished:request];
             }
-            if (request.successComplitionBlock) {
-                request.successComplitionBlock(request);
+            if (request.successCompletionBlock) {
+                request.successCompletionBlock(request);
             }
         } else {
             
@@ -273,8 +273,8 @@
             if (request.delegate != nil) {
                 [request.delegate requestFailed:request];
             }
-            if (request.failureComplitionBlock) {
-                request.failureComplitionBlock(request);
+            if (request.failureCompletionBlock) {
+                request.failureCompletionBlock(request);
             }
         }
     }

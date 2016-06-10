@@ -6,13 +6,13 @@
 //  Copyright © 2016年 shavekevin. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "SKAppDelegate.h"
 
-@interface AppDelegate ()
+@interface SKAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation SKAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

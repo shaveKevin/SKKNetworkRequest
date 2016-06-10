@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+@class SKResult;
 /**
  *  MethodNetworkRequest
  */
@@ -74,6 +75,11 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 
 
 @interface SKNetworkBaseRequest : NSObject
+/**
+ *  @brief result
+ */
+@property (nonatomic, strong) SKResult *result;
+
 /**
  *  <#Description#>
  */
@@ -157,15 +163,15 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 /**
  *  <#Description#>
  */
-@property (nonatomic, copy) void (^successComplitionBlock)(SKNetworkBaseRequest *);
+@property (nonatomic, copy) void (^successCompletionBlock)(SKNetworkBaseRequest *);
 /**
  *  <#Description#>
  */
-@property (nonatomic, copy) void (^failureComplitionBlock)(SKNetworkBaseRequest *);
+@property (nonatomic, copy) void (^failureCompletionBlock)(SKNetworkBaseRequest *);
 /**
  *  <#Description#>
  */
-@property (nonatomic, copy) void (^cacheComplitionBlock)(SKNetworkBaseRequest *);
+@property (nonatomic, copy) void (^cacheCompletionBlock)(SKNetworkBaseRequest *);
 /**
  *  Description
  */

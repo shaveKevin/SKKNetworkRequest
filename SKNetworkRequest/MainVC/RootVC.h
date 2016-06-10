@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  ViewController.h
 //  SKNetworkRequest
 //
 //  Created by shavekevin on 16/3/9.
@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface RootVC : UIViewController
 
 
 @end

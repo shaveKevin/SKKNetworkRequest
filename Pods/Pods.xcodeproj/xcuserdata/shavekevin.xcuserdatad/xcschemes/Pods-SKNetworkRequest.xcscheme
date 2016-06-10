@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '30ACA456F5060CEA96708BE1'
+               BlueprintIdentifier = 'A947CCB9B67B9DDC16EE248B'
                BlueprintName = 'Pods-SKNetworkRequest'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_SKNetworkRequest.framework'>
