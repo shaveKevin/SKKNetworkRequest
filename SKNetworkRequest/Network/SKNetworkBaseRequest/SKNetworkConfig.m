@@ -10,9 +10,9 @@
 
 @implementation SKNetworkConfig
 /**
- *  <#Description#>
+ *  单例
  *
- *  @return <#return value description#>
+ *  @return 网络请求只配置一次
  */
 + (SKNetworkConfig *)shareInstance {
     
@@ -25,13 +25,22 @@
     return shareManager;
 }
 /**
- *  <#Description#>
+ *  基础接口
  *
- *  @return <#return value description#>
+ *  @return 一般都是固定不变的url
  */
 - (NSString *)baseUrl {
     
     return nil;
 }
+/**
+ *  @brief 请求的cdnURL
+ *
+ *  @return the cdnUrl Which  the request needed (optional)
+ */
+- (NSString *)cdnUrl {
+    return nil;
+}
+
 
 @end

@@ -13,5 +13,9 @@
 #import "SKNetworkRequest.h"
 
 @interface SKNetworkStatic_request : SKNetworkRequest
+/**
+ *  @brief 处理数据
+ */
 - (void)dealWithData;
+
 @end

@@ -11,9 +11,9 @@
 @interface SKNetworkConfig : NSObject
 
 /**
- *  <#Description#>
+ *  单例
  *
- *  @return <#return value description#>
+ *  @return 单例
  */
 + (SKNetworkConfig *)shareInstance;
 
@@ -22,7 +22,7 @@
  */
 @property (nonatomic, copy) NSString *baseUrl;
 /**
- *  <#Description#>
+ *  请求的CdnURL
  */
 @property (nonatomic, copy) NSString *cdnUrl;
 

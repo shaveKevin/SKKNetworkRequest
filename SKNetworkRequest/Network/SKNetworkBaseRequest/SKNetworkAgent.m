@@ -12,22 +12,22 @@
 
 @implementation SKNetworkAgent {
     /**
-     *  <#Description#>
+     *  networkManager
      */
     AFHTTPRequestOperationManager *_manager;
     /**
-     *  <#Description#>
+     *  配置
      */
     SKNetworkConfig *_config;
     /**
-     *  <#Description#>
+     *  a  dictionary  which can  remember  request
      */
     NSMutableDictionary *_requestRecord;
 }
 /**
- *  <#Description#>
+ *  单例
  *
- *  @return <#return value description#>
+ *  @return 单例 Singleton
  */
 
 + (SKNetworkAgent *)sharedInstance {
@@ -40,9 +40,9 @@
     return shareInstance;
 }
 /**
- *  <#Description#>
+ *  init
  *
- *  @return <#return value description#>
+ *  @return 初始化
  */
 - (instancetype)init {
     
@@ -56,7 +56,13 @@
     }
     return self;
 }
-
+/**
+ *  @brief 构建网络请求  拼接基础URL
+ *
+ *  @param request the  request which needed
+ *
+ *  @return url  of request  which contains baseurl  and  cdnUrl
+ */
 - (NSString *)buildRequestUrl:(SKNetworkBaseRequest *)request {
     
     NSString *detailUrl = [request requestUrl];
@@ -86,9 +92,9 @@
 /**
  *  设置公共参数
  *
- *  @param dicParame <#dicParame description#>
+ *  @param dicParame 设置公共参数
  *
- *  @return <#return value description#>
+ *  @return 公共参数组成的字典
  */
 - (NSDictionary *)baseRequestArgument:(NSDictionary *)dicParame {
     if (dicParame&& [dicParame isKindOfClass:[NSDictionary class]]) {
@@ -100,6 +106,12 @@
     return nil;
 }
 
+/**
+ *  @brief 添加网络请求 同步还是异步
+ *
+ *  @param request request
+ *  @param async   async  or  not
+ */
 - (void)addRequest:(SKNetworkBaseRequest *)request async:(BOOL)async {
     NSString *url = [self buildRequestUrl:request];
     id parame = request.requestArgument;
@@ -118,7 +130,13 @@
         
     }
 }
-
+/**
+ *  @brief 同步网络请求
+ *
+ *  @param request request
+ *  @param url      full url
+ *  @param parame  dicParame
+ */
 - (void)asyncRequest:(SKNetworkBaseRequest *)request url:(NSString *)url  parame:(NSDictionary *)parame{
     
     SKNetworkRequestMethod method = [request requestMethod];
@@ -192,7 +210,13 @@
     [self addOperation:request];
     
 }
-
+/**
+ *  @brief 异步网络请求
+ *
+ *  @param request request
+ *  @param url     full url
+ *  @param parame  dicParame
+ */
 - (void)syncRequest:(SKNetworkBaseRequest *)request url:(NSString *)url  parame:(NSDictionary *)parame{
     SKNetworkRequestMethod method = [request requestMethod];
     AFHTTPRequestSerializer *requestSerializer;
@@ -225,7 +249,11 @@
     [self handleRequestResult:request.requestOperation];
    
 }
-
+/**
+ *  @brief 取消网络请求
+ *
+ *  @param request cancel Request
+ */
 - (void)cancleRequest:(SKNetworkBaseRequest *)request {
     
     [request.requestOperation cancel];
@@ -233,7 +261,9 @@
     [self removeOperation:request.requestOperation];
     
 }
-
+/**
+ *  @brief 根据记录的网络请求  然后取消所有的网络请求
+ */
 - (void)cancleAllRequest {
     
     NSDictionary *copyRecord = [_requestRecord copy];
@@ -242,7 +272,11 @@
         [request stop];
     }
 }
-
+/**
+ *  @brief 添加网络请求操作到记录字典中
+ *
+ *  @param request add  operationRequest
+ */
 - (void)addOperation:(SKNetworkBaseRequest*)request {
     
     if (request.requestOperation != nil) {
@@ -252,7 +286,11 @@
         }
     }
 }
-
+/**
+ *  @brief 网络请求成功或者失败的处理
+ *
+ *  @param operation deal with  request which request success or failure
+ */
 - (void)handleRequestResult:(AFHTTPRequestOperation*)operation {
     
     NSString *key = [self requestHashKey:operation];
@@ -283,7 +321,11 @@
     [request clearCompletionBlock];
     
 }
-
+/**
+ *  @brief 从记录队列中移除网络请求
+ *
+ *  @param operation remove request from the queuerecord
+ */
 - (void)removeOperation:(AFHTTPRequestOperation*)operation {
     
     NSString* key = [self requestHashKey:operation];
@@ -292,7 +334,13 @@
         [_requestRecord removeObjectForKey:key];
     }
 }
-
+/**
+ *  @brief 转化
+ *
+ *  @param operation turn
+ *
+ *  @return string
+ */
 - (NSString*)requestHashKey:(AFHTTPRequestOperation*)operation {
     
     NSString* key = [NSString stringWithFormat:@"%lu", (unsigned long)[operation hash]];

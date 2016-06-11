@@ -12,9 +12,9 @@ static NSString *const staticAPI = @"http://m.aipai.com/mobile/xifen/collect_men
 
 @implementation SKNetworkStatic_request
 /**
- *  <#Description#>
+ *  api
  *
- *  @return <#return value description#>
+ *  @return 接口地址
  */
 
 - (NSString *)requestUrl {

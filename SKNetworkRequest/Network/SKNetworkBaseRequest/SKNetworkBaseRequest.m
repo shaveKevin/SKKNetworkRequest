@@ -10,11 +10,7 @@
 #import "SKNetworkAgent.h"
 static CGFloat const timeOutInterval = 60.0f;
 @implementation SKNetworkBaseRequest
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (instancetype)init {
     
     if (self= [super init]) {
@@ -30,117 +26,70 @@ static CGFloat const timeOutInterval = 60.0f;
     }
     return self;
 }
-/// 根据需要进行重载的
+
+#pragma mark  - 根据需要子类进行重载的-
 - (void)cacheCompleteFilter {
     
 }
-/**
- *  <#Description#>
- */
+
 - (void)requestSuccessCompleteFilter {
     
 }
-/**
- *  <#Description#>
- */
+
 - (void)requestFailureFilter {
     
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSString *)requestUrl {
     
     return _requestUrl;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSString *)cdnUrl {
     
     return _cdnUrl;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSString *)baseUrl {
     
     return _baseUrl;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSTimeInterval)requestTimeoutInterval {
     
     return _requestTimeoutInterval;
     
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (id)requestArgument {
     
     return _requestArgument;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (SKNetworkRequestMethod)requestMethod {
     
     return _requestMethod;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (SKNetworkRequestSerializerType)requestSerializerType {
     
     return _requestSerializerType;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 
 - (NSArray *)requestAuthorizationHeaderFieldArray {
     return _requestAuthorizationHeaderFieldArray;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSDictionary *)requestHeaderFieldValueDictionary {
     return _requestHeaderFieldValueDictionary;
 }
-/**
- *
- *
- *  @return <#return value description#>
- */
+
 - (BOOL)useCDN {
     
     return _useCDN;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (BOOL)statusCodeValidator {
     
     NSInteger statusCode = [self responseStatusCode];
@@ -150,85 +99,49 @@ static CGFloat const timeOutInterval = 60.0f;
         return NO;
     }
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 
 - (AFConstructingBlock)constructingBodyBlock {
     return nil;
 }
-/**
- *  异步
- */
+
 - (void)asyncStart {
     
     [[SKNetworkAgent sharedInstance] addRequest:self async:YES];
 }
-/**
- *  同步
- */
+
 - (void)syncStart {
     
     [[SKNetworkAgent sharedInstance] addRequest:self async:NO];
 
 }
-/**
- *  <#Description#>
- */
+
 - (void)stop {
     self.delegate = nil;
     [[SKNetworkAgent sharedInstance] cancleRequest:self];
     
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (BOOL)isExecuting {
     return self.requestOperation.isExecuting;
 }
-/**
- *  <#Description#>
- *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
- *  @param cache   <#cache description#>
- */
+
 - (void)asyncStartWithCompletionBlockWithSuccess:(void (^)(SKNetworkBaseRequest *))success failure:(void (^)(SKNetworkBaseRequest *))failure cache:(void (^)(SKNetworkBaseRequest *))cache {
     
     [self setCompletionBlockWithSuccess:success failure:failure cache:cache];
     [self asyncStart];
 }
-/**
- *  <#Description#>
- *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
- *  @param cache   <#cache description#>
- */
+
 - (void)syncStartWithCompletionBlockWithSuccess:(void (^)(SKNetworkBaseRequest *))success failure:(void (^)(SKNetworkBaseRequest *))failure cache:(void (^)(SKNetworkBaseRequest *))cache {
     [self setCompletionBlockWithSuccess:success failure:failure cache:cache];
     [self syncStart];
 }
-/**
- *  <#Description#>
- *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
- *  @param cache   <#cache description#>
- */
+
 - (void)setCompletionBlockWithSuccess:(void (^)(SKNetworkBaseRequest *))success failure:(void (^)(SKNetworkBaseRequest *))failure cache:(void (^)(SKNetworkBaseRequest *))cache {
     
     self.successCompletionBlock = success;
     self.failureCompletionBlock = failure;
     self.cacheCompletionBlock = cache;
 }
-/**
- *  <#Description#>
- */
+
 - (void)clearCompletionBlock {
     
     self.successCompletionBlock = nil;
@@ -236,21 +149,13 @@ static CGFloat const timeOutInterval = 60.0f;
     self.cacheCompletionBlock = nil;
     
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSString *)responseString {
     
     NSString *responseString = self.requestOperation.responseString;
     return responseString;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (id)responseJSONObject {
     
      NSString *responseString = self.responseString;
@@ -259,20 +164,12 @@ static CGFloat const timeOutInterval = 60.0f;
      return  result;
     
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSInteger)responseStatusCode {
     
     return self.requestOperation.response.statusCode;
 }
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
+
 - (NSDictionary *)responseHeaders {
     
     return self.requestOperation.response.allHeaderFields;

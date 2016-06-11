@@ -14,29 +14,29 @@
  */
 typedef NS_ENUM(NSInteger, SKNetworkRequestMethod) {
     /**
-     *  Description
+     *  get method
      */
     SKNetworkRequestMethodGet = 0,
     /**
-     *  Description
+     *  put method
      */
     SKNetworkRequestMethodPut = 1,
     /**
-     *  Description
+     *  post method
      */
     SKNetworkRequestMethodPost = 2,
 };
 
 /**
- *  Description
+ *  请求方式
  */
 typedef NS_ENUM(NSInteger,  SKNetworkRequestSerializerType) {
     /**
-     *  <#Description#>
+     *  http
      */
     SKNetworkRequestSerializerTypeHttp = 0,
     /**
-     *  <#Description#>
+     *  json
      */
     SKNetworkRequestSerializerTypeJson = 1,
 };
@@ -44,29 +44,32 @@ typedef NS_ENUM(NSInteger,  SKNetworkRequestSerializerType) {
 typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 
 @class SKNetworkBaseRequest;
+/**
+ *  @brief delegate
+ */
 @protocol SKNetworkBaseRequestDelegate <NSObject>
 
 @optional
 /**
- *  <#Description#>
+ *  缓存读取成功
  *
- *  @param request <#request description#>
+ *  @param request cache read  finished
  */
 - (void)cacheFinished:(SKNetworkBaseRequest *)request;
 /**
- *  <#Description#>
+ *  请求完成
  *
- *  @param request <#request description#>
+ *  @param request request finished
  */
 - (void)requestFinished:(SKNetworkBaseRequest *)request;
 /**
- *  <#Description#>
+ *  请求失败
  *
- *  @param request <#request description#>
+ *  @param request request failed
  */
 - (void)requestFailed:(SKNetworkBaseRequest *)request;
 /**
- *  <#Description#>
+ *  清除网络请求  make it clean
  */
 - (void)clearRequet;
 
@@ -76,60 +79,60 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 
 @interface SKNetworkBaseRequest : NSObject
 /**
- *  @brief result
+ *  @brief result 网络数据
  */
 @property (nonatomic, strong) SKResult *result;
 
 /**
- *  <#Description#>
+ *  网络数据
  */
 @property (nonatomic, strong) NSMutableArray *dataArray;
 /**
- *  <#Description#>
+ *  接口
  */
 @property (nonatomic, copy) NSString *requestUrl;
 /**
- *  <#Description#>
+ *  cdnUrl
  */
 @property (nonatomic, copy) NSString *cdnUrl;
 /**
- *  <#Description#>
+ *  baseUrl
  */
 @property (nonatomic, copy) NSString *baseUrl;
 /**
- *  <#Description#>
+ *  响应超时时间   timeInterval out  about the request
  */
 @property (nonatomic, assign) NSTimeInterval requestTimeoutInterval;
 /**
- *  <#Description#>
- */
+ *  网络请求参数列表  list of dicParame
+*/
 @property (nonatomic, strong) id requestArgument;
 /**
- *  <#Description#>
+ *  request method
  */
 @property (nonatomic, assign) SKNetworkRequestMethod requestMethod;
 /**
- *  <#Description#>
+ *  request tag
  */
 @property (nonatomic, assign) NSInteger tag;
 /**
- *  <#Description#>
+ *  type  of  Serializer  序列化类型
  */
 @property (nonatomic, assign) SKNetworkRequestSerializerType  requestSerializerType;
 /**
- *  <#Description#>
+ *  header field array 请求的Server用户名和密码
  */
 @property (nonatomic, strong) NSArray *requestAuthorizationHeaderFieldArray;
 /**
- *  <#Description#>
+ *  header field dictionary  在HTTP报头添加的自定义参数
  */
 @property (nonatomic, strong) NSDictionary *requestHeaderFieldValueDictionary;
 /**
- *  <#Description#>
+ *  是否使用了 cdn
  */
 @property (nonatomic, assign) BOOL useCDN;
 /**
- *  <#Description#>
+ *  结果dic
  */
 @property (nonatomic, strong) NSMutableDictionary *dataDict;
 /**
@@ -137,7 +140,7 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
  */
 @property (nonatomic, strong) NSDictionary *userInfo;
 /**
- *  <#Description#>
+ *  requestOperation
  */
 @property (nonatomic, strong) AFHTTPRequestOperation *requestOperation;
 /**
@@ -145,202 +148,169 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
  */
 @property (nonatomic, weak) id<SKNetworkBaseRequestDelegate> delegate;
 /**
- *  <#Description#>
+ *  响应头
  */
 @property (nonatomic, strong ,readonly) NSDictionary *responseHeaders;
 /**
- *  <#Description#>
+ *  返回json字符串
  */
 @property (nonatomic, copy, readonly) NSString *responseString;
 /**
- *  <#Description#>
+ *  返回jsonObject
  */
 @property (nonatomic, strong, readonly) id responseJSONObject;
 /**
- *  <#Description#>
+ *  请求状态码
  */
 @property (nonatomic, assign) NSInteger responseStatusCode;
 /**
- *  <#Description#>
+ *  网络成功的回调
  */
 @property (nonatomic, copy) void (^successCompletionBlock)(SKNetworkBaseRequest *);
 /**
- *  <#Description#>
+ *  网络请求失败的回调
  */
 @property (nonatomic, copy) void (^failureCompletionBlock)(SKNetworkBaseRequest *);
 /**
- *  <#Description#>
+ *  缓存的回调
  */
 @property (nonatomic, copy) void (^cacheCompletionBlock)(SKNetworkBaseRequest *);
 /**
- *  Description
+ *  append self to request queue  异步
  */
 - (void)asyncStart;
 /**
- *  <#Description#>
+ *  append self to request queue  同步
  */
 - (void)syncStart;
 /**
- *  remove self from request queue
+ *  remove self from request queue  移除
  */
 - (void)stop;
 
 /**
- *  <#Description#>
- *
  *  @return execute
  */
 
 - (BOOL)isExecuting;
 /**
- *  block回调
+ *  block回调   异步
  *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
- *  @param cache   <#cache description#>
+ *  @param success 成功
+ *  @param failure 失败
+ *  @param cache   缓存
  */
 -(void)asyncStartWithCompletionBlockWithSuccess:(void(^)(SKNetworkBaseRequest *request))success failure:(void (^)(SKNetworkBaseRequest *request))failure cache:(void(^)(SKNetworkBaseRequest *request))cache;
 
 /**
- *  <#Description#>
+ *  block 回调  同步
  *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
- *  @param cache   <#cache description#>
+ *  @param success 成功
+ *  @param failure 失败
+ *  @param cache   缓存
  */
 -(void)syncStartWithCompletionBlockWithSuccess:(void(^)(SKNetworkBaseRequest *request))success failure:(void (^)(SKNetworkBaseRequest *request))failure cache:(void(^)(SKNetworkBaseRequest *request))cache;
 
 
+/**
+ *  @brief 设置回调block
+ *
+ *  @param success 成功
+ *  @param failure 失败
+ *  @param cache   缓存
+ */
 - (void)setCompletionBlockWithSuccess:(void(^)(SKNetworkBaseRequest *request))success failure:(void (^)(SKNetworkBaseRequest *request))failure cache:(void(^)(SKNetworkBaseRequest *request))cache;
 /**
- *  打破block循环引用
+ *  打破block循环引用  置block 为nil
  */
 
 - (void)clearCompletionBlock;
+
+#pragma mark  - 以下方法由子类继承来覆盖默认值  -
+
 /**
- *  <#Description#>
+ *  缓存回调
  */
 - (void)cacheCompleteFilter;
 /**
- *  <#Description#>
+ *  请求成功的回调
  */
 - (void)requestSuccessCompleteFilter;
 /**
- *  <#Description#>
+ *  请求失败的回调
  */
 - (void)requestFailureFilter;
 /**
- *  <#Description#>
+ *  设置请求的URL setter getter
  *
- *  @param requestUrl <#requestUrl description#>
+ *  @param requestUrl set the url of request
  */
 - (void)setRequestUrl:(NSString *)requestUrl;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (NSString *)requestUrl;
+
 /**
- *  <#Description#>
+ *  请求的CdnURL  setter getter
  *
- *  @param cdnUrl <#cdnUrl description#>
+ *  @param cdnUrl set  cdnurl  of request
  */
 - (void)setCdnUrl:(NSString *)cdnUrl;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (NSString *)cdnUrl;
 
 /**
- *  <#Description#>
+ *  请求的BaseURL SETTER GETTER
  *
- *  @param baseUrl <#baseUrl description#>
+ *  @param baseUrl set baseURL OF THE REQUEST
  */
 - (void)setBaseUrl:(NSString *)baseUrl;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (NSString *)baseUrl;
+
 /**
- *  <#Description#>
+ *  请求的连接超时时间，默认为60秒 SETTER GETTER
  *
- *  @param requestTimeoutInterval <#requestTimeoutInterval description#>
+ *  @param requestTimeoutInterval requestTimeoutInterval DEFAULT  60S
  */
 - (void)setRequestTimeoutInterval:(NSTimeInterval)requestTimeoutInterval;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (NSTimeInterval)requestTimeoutInterval;
+
 /**
- *  <#Description#>
+ *  请求的参数列表 SETTER GETTER
  *
- *  @param requestArgument <#requestArgument description#>
+ *  @param requestArgument SET  REQUEST DICPARAME
  */
 - (void)setRequestArgument:(id)requestArgument;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (id)requestArgument;
+
 /**
- *  <#Description#>
+ *  Http请求的方法 SETTER GETTER
  *
- *  @param requestMethod <#requestMethod description#>
+ *  @param requestMethod requestMethod
  */
 - (void)setRequestMethod:(SKNetworkRequestMethod)requestMethod;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (SKNetworkRequestMethod)requestMethod;
 /**
- *  <#Description#>
+ *  请求的SerializerType  SETTER GETTER
  *
- *  @param requestSerializerType <#requestSerializerType description#>
+ *  @param requestSerializerType requestSerializerType OF REQUEST
  */
 - (void)setRequestSerializerType:(SKNetworkRequestSerializerType)requestSerializerType;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (SKNetworkRequestSerializerType)requestSerializerType;
+
 /**
- *  <#Description#>
+ *  请求的Server用户名和密码 SETTER GETTER
  *
- *  @param requestAuthorizationHeaderFieldArray <#requestAuthorizationHeaderFieldArray description#>
+ *  @param requestAuthorizationHeaderFieldArray requestAuthorizationHeaderFieldArray USERNAME AND PASSWORD
  */
 - (void)setRequestAuthorizationHeaderFieldArray:(NSArray *)requestAuthorizationHeaderFieldArray;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
-
 - (NSArray *)requestAuthorizationHeaderFieldArray;
 /**
- *  <#Description#>
+ *  在HTTP报头添加的自定义参数  SETTER GETTER
  *
- *  @param requestHeaderFieldValueDictionary <#requestHeaderFieldValueDictionary description#>
+ *  @param requestHeaderFieldValueDictionary requestHeaderFieldValueDictionary
  */
 - (void)setRequestHeaderFieldValueDictionary:(NSDictionary *)requestHeaderFieldValueDictionary;
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 - (NSDictionary *)requestHeaderFieldValueDictionary;
 /**
- *  <#Description#>
+ *  SETTER GETTER
  *
  *  @param useCDN 是否使用CDN的host地址
  */
@@ -354,11 +324,11 @@ typedef void(^AFConstructingBlock)(id<AFMultipartFormData>formData);
 /**
  *  用于检查Status Code是否正常的方法
  *
- *  @return <#return value description#>
+ *  @return  Status Code
  */
 - (BOOL)statusCodeValidator;
 /**
- *  <#Description#>
+ *  post  contains richtext use this api
  *
  *  @return 当POST的内容带有文件等富文本时使用
  */
